@@ -29,6 +29,9 @@ int main(int, const char *[])
     print("- 2matrix\n{}", display(matrix2));
     print("- (2matrix - matrix)\n{}", display(matrix2 - matrix));
 
+    matrix2 -= matrix;
+    print("- (2matrix -= matrix)\n{}", display(matrix2));
+
     // Scalar/Matrix operations
     print("- 1 + matrix\n{}", display(1.0 + matrix));
     print("- 1 - matrix\n{}", display(1.0 - matrix));

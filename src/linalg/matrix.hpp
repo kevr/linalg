@@ -54,6 +54,8 @@ class matrix
         return data[i][j];
     }
 
+    matrix &operator-=(const matrix &o);
+
     const T &at(std::size_t i, std::size_t j) const
     {
         return data[i][j];
@@ -123,6 +125,18 @@ matrix<T, R, C> transform(const linalg::matrix<T, R, C> &lhs,
     for (std::size_t i = 0; i < lhs.rows(); ++i) {
         for (std::size_t j = 0; j < lhs.columns(); ++j) {
             m[i, j] = f(lhs(i, j), rhs(i, j));
+        }
+    }
+    return m;
+}
+
+template <typename T, std::size_t R, std::size_t C, typename Functor>
+matrix<T, R, C> &transform_inplace(matrix<T, R, C> &m, const matrix<T, R, C> &o,
+                                   Functor f)
+{
+    for (std::size_t i = 0; i < m.rows(); ++i) {
+        for (std::size_t j = 0; j < m.columns(); ++j) {
+            m[i, j] = f(m(i, j), o(i, j));
         }
     }
     return m;
@@ -216,6 +230,15 @@ linalg::matrix<T, R, C> operator/(const linalg::matrix<T, R, C> &m,
                                   const T &scalar)
 {
     return linalg::transform(m, unary_op<T>(std::divides<T>{}, scalar));
+}
+
+template <typename T, std::size_t R, std::size_t C>
+linalg::matrix<T, R, C> &
+linalg::matrix<T, R, C>::operator-=(const linalg::matrix<T, R, C> &o)
+{
+    return linalg::transform_inplace(*this, o, [](const T &lhs, const T &rhs) {
+        return lhs - rhs;
+    });
 }
 
 template <typename T, std::size_t R, std::size_t C>
