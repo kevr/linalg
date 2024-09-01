@@ -57,6 +57,9 @@ int main(int, const char *[])
     print("- 1 * vec\n> {}", display(1.0 * vec));
     print("- 1 / vec\n> {}", display(1.0 / vec));
 
+    vec -= vec;
+    print("- vec -= vec\n> {}", display(vec));
+
     dot_test<T, 2, 2, 2, 2>();
     dot_test<T, 1, 3, 3, 2>();
     dot_test<T, 3, 3, 3, 3>();

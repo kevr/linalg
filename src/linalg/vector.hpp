@@ -56,6 +56,16 @@ std::vector<T> transform(const std::vector<T> &lhs, const std::vector<T> &rhs,
     return v;
 }
 
+template <typename T, typename Functor>
+std::vector<T> &transform_inplace(std::vector<T> &v, const std::vector<T> &o,
+                                  Functor f)
+{
+    for (std::size_t i = 0; i < v.size(); ++i) {
+        v[i] = f(v.at(i), o.at(i));
+    }
+    return v;
+}
+
 }; // namespace linalg
 
 // v1 + v2 == [v1[0] + v2[0], ..., vn[0] + vn[1]]
@@ -140,6 +150,13 @@ template <typename T>
 std::vector<T> operator/(const std::vector<T> &orig, const T &scalar)
 {
     return linalg::transform(orig, unary_op<T>(std::divides<T>{}, scalar));
+}
+
+// in-place subtraction
+template <typename T>
+std::vector<T> &operator-=(std::vector<T> &v, const std::vector<T> &o)
+{
+    return linalg::transform_inplace(v, o, std::minus<T>{});
 }
 
 template <typename T>
