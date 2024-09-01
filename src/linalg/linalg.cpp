@@ -24,6 +24,7 @@ int main(int, const char *[])
     // Matrix operations
     linalg::matrix<T, 2, 5> matrix(rng::random<T>{});
     print("- matrix\n{}", display(matrix));
+    print("- -matrix\n{}", display(-matrix));
 
     auto matrix2 = matrix + matrix;
     print("- 2matrix\n{}", display(matrix2));
@@ -46,6 +47,7 @@ int main(int, const char *[])
     print("- random_vector\n> {}", display(vector::random<T>(2)));
     std::vector<T> vec({2.0, 3.0});
     print("- vec\n> {}", display(vec));
+    print("- -vec\n> {}", display(-vec));
     print("- vec + vec\n> {}", display(vec + vec));
     print("- vec - vec\n> {}", display(vec - vec));
     print("- vec * vec\n> {}", display(vec * vec));

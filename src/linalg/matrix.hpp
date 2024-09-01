@@ -55,6 +55,7 @@ class matrix
     }
 
     matrix &operator-=(const matrix &o);
+    matrix operator-() const;
 
     const T &at(std::size_t i, std::size_t j) const
     {
@@ -238,6 +239,12 @@ linalg::matrix<T, R, C>::operator-=(const linalg::matrix<T, R, C> &o)
 {
     return linalg::transform_inplace(*this, o, std::minus<T>{});
 }
+
+template <typename T, std::size_t R, std::size_t C>
+linalg::matrix<T, R, C> linalg::matrix<T, R, C>::operator-() const
+{
+    return linalg::transform(*this, std::negate<T>{});
+};
 
 template <typename T, std::size_t R, std::size_t C>
 std::ostream &operator<<(std::ostream &os,

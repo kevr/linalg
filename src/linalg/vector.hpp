@@ -160,6 +160,12 @@ std::vector<T> &operator-=(std::vector<T> &v, const std::vector<T> &o)
 }
 
 template <typename T>
+std::vector<T> operator-(const std::vector<T> &v)
+{
+    return linalg::transform(v, std::negate<T>{});
+}
+
+template <typename T>
 std::ostream &operator<<(std::ostream &os, const std::vector<T> &vector)
 {
     const std::size_t last = vector.size() - 1;
