@@ -2,6 +2,7 @@
 #define VECTOR_HPP
 
 #include "algorithm.hpp"
+#include "defaults.hpp"
 #include "format.hpp"
 #include "random.hpp"
 #include "string.hpp"
@@ -34,6 +35,17 @@ std::vector<T> random(std::size_t n)
 
 namespace linalg
 {
+
+// dot(lhs, rhs) == scalar
+template <typename T>
+T dot(const std::vector<T> &lhs, const std::vector<T> &rhs)
+{
+    T sum{type_default<T>::value};
+    for (std::size_t i = 0; i < lhs.size(); ++i) {
+        sum += lhs.at(i) * rhs.at(i);
+    }
+    return sum;
+}
 
 template <typename T, typename Functor>
 std::vector<T> transform(const std::vector<T> &orig, Functor f)
