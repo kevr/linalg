@@ -29,8 +29,7 @@ class matrix
 
     matrix &operator=(const matrix &o)
     {
-        std::memcpy(&data[0][0], &o.data[0][0],
-                    o.rows() * o.columns() * sizeof(T));
+        std::memcpy(&data, &o.data, sizeof(data));
         return *this;
     }
 

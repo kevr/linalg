@@ -68,5 +68,8 @@ int main(int, const char *[])
 
     print("{}", str::join(matrix));
 
+    std::cout << matrix << std::endl;
+    auto m2 = matrix;
+    std::cout << m2 << std::endl;
     return 0;
 }
