@@ -66,5 +66,7 @@ int main(int, const char *[])
     dot_test<T, 1, 3, 3, 2>();
     dot_test<T, 3, 3, 3, 3>();
 
+    print("{}", str::join(matrix));
+
     return 0;
 }
