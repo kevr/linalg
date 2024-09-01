@@ -236,9 +236,7 @@ template <typename T, std::size_t R, std::size_t C>
 linalg::matrix<T, R, C> &
 linalg::matrix<T, R, C>::operator-=(const linalg::matrix<T, R, C> &o)
 {
-    return linalg::transform_inplace(*this, o, [](const T &lhs, const T &rhs) {
-        return lhs - rhs;
-    });
+    return linalg::transform_inplace(*this, o, std::minus<T>{});
 }
 
 template <typename T, std::size_t R, std::size_t C>
